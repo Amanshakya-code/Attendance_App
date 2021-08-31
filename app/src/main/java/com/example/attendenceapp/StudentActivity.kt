@@ -25,6 +25,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.android.synthetic.main.activity_student.*
 import kotlinx.android.synthetic.main.dialog.view.*
 import kotlinx.android.synthetic.main.toolbar.view.*
+import kotlinx.coroutines.delay
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
@@ -33,7 +34,7 @@ import kotlin.properties.Delegates
 class StudentActivity : AppCompatActivity() {
     private lateinit var subjectName:String
     private lateinit var className:String
-    private lateinit var StudentList:ArrayList<StudentItem>
+    private lateinit var StudentList:ArrayList<StudentEntity>
     private  lateinit var adapter: StudentAdapter
     private var cid:Int = 0
     lateinit var viewModel : attendenceViewmodel
@@ -56,7 +57,7 @@ class StudentActivity : AppCompatActivity() {
 
         student_recylerView.layoutManager = LinearLayoutManager(this)
         StudentList = arrayListOf()
-        adapter = StudentAdapter(StudentList)
+        adapter = StudentAdapter()
         student_recylerView.adapter = adapter
         addstudentfb.setOnClickListener {
             showDailog()
@@ -65,28 +66,49 @@ class StudentActivity : AppCompatActivity() {
         viewModel.getAllStudent(cid).observe(this, Observer {
             StudentList.clear()
             Log.i("check","$it")
+            adapter.differ.submitList(it)
+            adapter.notifyDataSetChanged()
+            StudentList.clear()
             for(student in it)
             {
-                val st = StudentItem(student.Sid!!,student.st_roll,student.stname)
-                StudentList.add(st)
+                StudentList.add(student)
             }
-            adapter.notifyDataSetChanged()
-           // loadStatus()
-
         })
 
     }
 
     private fun loadStatus() {
+
        Log.i("statusfos","$StudentList")
-        for(studentdb in StudentList)
-        {
-            val currentStudentSid = studentdb.sid
-            val CurrentStudentStatus = viewModel.getStatus(currentStudentSid,date)
-            studentdb.status = CurrentStudentStatus
-        }
+
+
+       for(i in 0..StudentList.size-1){
+           val student = StudentList.get(i)
+           val currentStudentSid = student.Sid!!
+           Log.i("chaman","$currentStudentSid")
+           viewModel.getStatus(currentStudentSid,date)
+       }
+
+        viewModel.statusView.observe(this, Observer {
+
+            if(it.size == StudentList.size){
+                Log.i("daks","$it")
+                attendance(it)
+            }
+        })
+
+        adapter.differ.submitList(StudentList)
         Log.i("statusfos","$StudentList")
         adapter.notifyDataSetChanged()
+    }
+
+    private fun attendance(mp:HashMap<Int,String>) {
+        for (student in StudentList)
+        {
+            var currentStudentSid = student.Sid
+            var status = mp.get(currentStudentSid)
+            student.status = status!!
+        }
     }
 
     private fun showDailog() {
@@ -116,16 +138,18 @@ class StudentActivity : AppCompatActivity() {
         toolbar_student.title_toolbar.text = className
         toolbar_student.subtitle_toolbar.text = subjectName
         toolbar_student.backbutton.setOnClickListener {
-            onBackPressed()
+           // onBackPressed()
+            loadStatus()
         }
         toolbar_student.saveBtn.setOnClickListener {
             for(student in StudentList)
             {
                 var state = student.status
                 if(state != "P") state = "A"
-                val status = statusEntity(null,student.sid,date,state)
+                val status = statusEntity(null,student.Sid!!,date,state)
                 viewModel.saveStatus(status)
             }
+
         }
     }
 }

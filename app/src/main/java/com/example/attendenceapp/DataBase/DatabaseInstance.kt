@@ -8,7 +8,7 @@ import com.example.attendenceapp.Model.ClassItem
 import com.example.attendenceapp.Model.StudentEntity
 import com.example.attendenceapp.Model.statusEntity
 
-@Database(entities = [ClassItem::class,StudentEntity::class,statusEntity::class],version = 2,exportSchema = false)
+@Database(entities = [ClassItem::class,StudentEntity::class,statusEntity::class],version = 3,exportSchema = false)
 abstract class DatabaseInstance : RoomDatabase(){
     abstract fun getmyDao() : myDAO
     companion object{

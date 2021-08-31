@@ -11,4 +11,5 @@ data class StudentEntity (
     val C_id:Int,
     val st_roll:String,
     val stname:String,
+    var status:String = ""
         )

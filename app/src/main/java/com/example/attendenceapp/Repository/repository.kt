@@ -24,5 +24,5 @@ class repository(val db:DatabaseInstance) {
         db.getmyDao().upsertStatus(statusEntity)
     }
 
-    fun getStatus(sid:Int,date:String) =  db.getmyDao().getStatus(sid,date)
+    suspend fun getStatus(sid:Int,date:String) =  db.getmyDao().getStatus(sid,date)
 }

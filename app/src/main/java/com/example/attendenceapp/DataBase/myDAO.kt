@@ -28,8 +28,8 @@ interface myDAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun upsertStatus(statusEntity: statusEntity)
 
-    @Query("SElECT status FROM statustb WHERE SID=:sid AND date LIKE :date")
-    fun getStatus(sid:Int,date:String):String
+    @Query("SElECT status FROM statustb WHERE SID==:sid AND date ==:date")
+    suspend fun getStatus(sid:Int,date:String):String
 
 
 }
