@@ -4,7 +4,7 @@ import androidx.room.Entity
 import androidx.room.Index
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "statustb",indices = [Index(value = ["SID"], unique = true)])
+@Entity(tableName = "statustb",indices = [Index(value = ["SID","date"], unique = true)])
 data class statusEntity (
     @PrimaryKey(autoGenerate = true)
     val id:Int? = null,

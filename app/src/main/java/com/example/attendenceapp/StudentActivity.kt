@@ -1,9 +1,15 @@
 package com.example.attendenceapp
 
+import android.app.DatePickerDialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuItem
+import android.view.View
+import android.widget.DatePicker
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -23,7 +29,9 @@ import com.example.attendenceapp.ViewModel.viewModelFactory
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 import kotlinx.android.synthetic.main.activity_student.*
+import kotlinx.android.synthetic.main.class_item.view.*
 import kotlinx.android.synthetic.main.dialog.view.*
+import kotlinx.android.synthetic.main.toolbar.*
 import kotlinx.android.synthetic.main.toolbar.view.*
 import kotlinx.coroutines.delay
 import java.text.SimpleDateFormat
@@ -42,6 +50,10 @@ class StudentActivity : AppCompatActivity() {
     val fm = SimpleDateFormat("dd-MMM-yyyy", Locale.getDefault())
     var date = fm.format(currenttime);
     private var position by Delegates.notNull<Int>()
+    lateinit var myCalendar: Calendar
+    lateinit var dateSetListener: DatePickerDialog.OnDateSetListener
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_student)
@@ -50,6 +62,8 @@ class StudentActivity : AppCompatActivity() {
         className = intent.getStringExtra(CLASS_NAME).toString()
         position = intent.getIntExtra(POSITION,-1)
         cid = intent.getIntExtra(CID,-1)
+        myCalendar = Calendar.getInstance()
+        //toolbar_student.subject_tv.text = date.toString()
 
         val repository = repository(DatabaseInstance.getDatabaseInstance(this))
         val viewModelFactory = viewModelFactory(application,respository = repository)
@@ -67,19 +81,25 @@ class StudentActivity : AppCompatActivity() {
             StudentList.clear()
             Log.i("check","$it")
             adapter.differ.submitList(it)
+
             adapter.notifyDataSetChanged()
             StudentList.clear()
             for(student in it)
             {
                 StudentList.add(student)
             }
-        })
 
+        })
+        loadStatus.setOnClickListener {
+            loadStatus()
+        }
     }
+
+
 
     private fun loadStatus() {
 
-       Log.i("statusfos","$StudentList")
+       Log.i("statusfos","$date")
 
 
        for(i in 0..StudentList.size-1){
@@ -107,6 +127,7 @@ class StudentActivity : AppCompatActivity() {
         {
             var currentStudentSid = student.Sid
             var status = mp.get(currentStudentSid)
+            if(status!=null)
             student.status = status!!
         }
     }
@@ -136,10 +157,9 @@ class StudentActivity : AppCompatActivity() {
     }
     private fun setToolBar() {
         toolbar_student.title_toolbar.text = className
-        toolbar_student.subtitle_toolbar.text = subjectName
+        toolbar_student.subtitle_toolbar.text = date
         toolbar_student.backbutton.setOnClickListener {
-           // onBackPressed()
-            loadStatus()
+           onBackPressed()
         }
         toolbar_student.saveBtn.setOnClickListener {
             for(student in StudentList)
@@ -150,6 +170,31 @@ class StudentActivity : AppCompatActivity() {
                 viewModel.saveStatus(status)
             }
 
+        }
+        toolbar.inflateMenu(R.menu.menu)
+        toolbar.setOnMenuItemClickListener {
+            when(it.itemId){
+                R.id.calendarView->{
+                    dateSetListener =
+                        DatePickerDialog.OnDateSetListener { _: DatePicker, year: Int, month: Int, dayOfMonth: Int ->
+                            myCalendar.set(Calendar.YEAR, year)
+                            myCalendar.set(Calendar.MONTH, month)
+                            myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
+                            val myformat = "dd-MMM-yyyy"
+                            val sdf = SimpleDateFormat(myformat)
+                            date = sdf.format(myCalendar.time)
+                            toolbar_student.subtitle_toolbar.text = date.toString()
+                        }
+                    val datePickerDialog = DatePickerDialog(
+                        this, dateSetListener, myCalendar.get(Calendar.YEAR),
+                        myCalendar.get(Calendar.MONTH), myCalendar.get(Calendar.DAY_OF_MONTH)
+                    )
+                        //datePickerDialog.datePicker.minDate = System.currentTimeMillis()
+                    datePickerDialog.show()
+
+                }
+            }
+            true
         }
     }
 }

@@ -53,6 +53,7 @@ class MainActivity : AppCompatActivity() {
         toolbar_main.subtitle_toolbar.visibility = View.GONE
         toolbar_main.backbutton.visibility = View.GONE
         toolbar_main.saveBtn.visibility = View.GONE
+        toolbar_main.loadStatus.visibility = View.GONE
     }
 
     private fun showDailog() {
