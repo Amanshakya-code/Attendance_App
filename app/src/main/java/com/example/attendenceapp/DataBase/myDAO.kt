@@ -31,5 +31,7 @@ interface myDAO {
     @Query("SElECT status FROM statustb WHERE SID==:sid AND date ==:date")
     suspend fun getStatus(sid:Int,date:String):String
 
+    @Query("SELECT date FROM statustb WHERE CID==:cid GROUP BY substr(date,3,8)")
+    fun getDistinctMonth(cid:Int):LiveData<List<String>>
 
 }

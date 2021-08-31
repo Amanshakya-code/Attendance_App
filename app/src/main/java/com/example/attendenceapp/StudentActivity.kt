@@ -1,6 +1,7 @@
 package com.example.attendenceapp
 
 import android.app.DatePickerDialog
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -166,7 +167,7 @@ class StudentActivity : AppCompatActivity() {
             {
                 var state = student.status
                 if(state != "P") state = "A"
-                val status = statusEntity(null,student.Sid!!,date,state)
+                val status = statusEntity(null,cid,student.Sid!!,date,state)
                 viewModel.saveStatus(status)
             }
 
@@ -192,6 +193,11 @@ class StudentActivity : AppCompatActivity() {
                         //datePickerDialog.datePicker.minDate = System.currentTimeMillis()
                     datePickerDialog.show()
 
+                }
+                R.id.attendanceSheet->{
+                    val intent = Intent(this,SheetActivity::class.java)
+                    intent.putExtra(CID,cid)
+                    startActivity(intent)
                 }
             }
             true

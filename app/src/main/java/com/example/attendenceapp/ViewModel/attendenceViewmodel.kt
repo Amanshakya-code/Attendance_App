@@ -44,4 +44,6 @@ class attendenceViewmodel(app:Application,private val repository: repository): A
         map.put(sid,status)
         statusView.postValue(map)
     }
+
+    fun getALlDistinctMonthData(cid:Int) = repository.getAllDistinctMonths(cid)
 }

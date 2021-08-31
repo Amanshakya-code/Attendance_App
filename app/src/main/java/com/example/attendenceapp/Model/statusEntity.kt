@@ -8,6 +8,8 @@ import androidx.room.PrimaryKey
 data class statusEntity (
     @PrimaryKey(autoGenerate = true)
     val id:Int? = null,
+
+    val CID:Int,
     val SID:Int,
     val date:String,
     val status:String

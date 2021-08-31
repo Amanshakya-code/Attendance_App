@@ -4,4 +4,7 @@
     <item
         android:id="@+id/calendarView"
         android:title="Change Date"/>
+    <item
+        android:id="@+id/attendanceSheet"
+        android:title="Get Attendance Sheet"/>
 </menu>
