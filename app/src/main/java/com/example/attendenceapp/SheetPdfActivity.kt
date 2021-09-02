@@ -4,11 +4,13 @@ import android.graphics.Color
 import android.graphics.Typeface
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.TableLayout
 import android.widget.TableRow
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import com.example.attendenceapp.Constant.constant.Companion.CLASS_NAME
 import com.example.attendenceapp.Constant.constant.Companion.MONTH
 import com.example.attendenceapp.Constant.constant.Companion.nameArray
 import com.example.attendenceapp.Constant.constant.Companion.rollnumArray
@@ -18,6 +20,7 @@ import com.example.attendenceapp.Repository.repository
 import com.example.attendenceapp.ViewModel.attendenceViewmodel
 import com.example.attendenceapp.ViewModel.viewModelFactory
 import kotlinx.android.synthetic.main.activity_sheet_pdf.*
+import kotlinx.android.synthetic.main.activity_student.*
 import kotlinx.android.synthetic.main.toolbar.view.*
 import java.util.*
 
@@ -25,6 +28,7 @@ class SheetPdfActivity : AppCompatActivity() {
 
     lateinit var viewModel : attendenceViewmodel
     var month = ""
+    var classname = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,11 +37,28 @@ class SheetPdfActivity : AppCompatActivity() {
         val viewModelFactory = viewModelFactory(application,respository = repository)
         viewModel = ViewModelProvider(this,viewModelFactory).get(attendenceViewmodel::class.java)
         month = intent.getStringExtra(MONTH).toString()
+        classname = intent.getStringExtra(CLASS_NAME).toString()
         for(i in 0..sidArray!!.size-1){
             Log.i("ddj","${sidArray[i]}--->${nameArray!![i]}---->${rollnumArray!![i]}--->$month")
         }
+
+        setuptoolbat()
         showTable()
 
+
+
+
+    }
+
+    private fun setuptoolbat() {
+        pdf_toolbar.saveBtn.visibility = View.GONE
+        pdf_toolbar.loadStatus.visibility = View.GONE
+        pdf_toolbar.subtitle_toolbar.text = month
+        pdf_toolbar.title_toolbar.text = classname
+
+        pdf_toolbar.backbutton.setOnClickListener {
+            onBackPressed()
+        }
     }
 
     private fun showTable() {
@@ -111,10 +132,6 @@ class SheetPdfActivity : AppCompatActivity() {
             tableLayout.addView(tableRow[i])
         }
         tableLayout.showDividers = TableLayout.SHOW_DIVIDER_MIDDLE
-
-
-
-
     }
 
     private fun getDayInMonth(fulldate: String): Int {

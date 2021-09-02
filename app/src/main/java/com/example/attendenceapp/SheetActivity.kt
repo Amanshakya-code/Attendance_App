@@ -11,6 +11,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.attendenceapp.Constant.constant
 import com.example.attendenceapp.Constant.constant.Companion.CID
+import com.example.attendenceapp.Constant.constant.Companion.CLASS_NAME
 import com.example.attendenceapp.Constant.constant.Companion.MONTH
 import com.example.attendenceapp.Constant.constant.Companion.NAMEARRAY
 import com.example.attendenceapp.Constant.constant.Companion.ROLLARRAY
@@ -30,6 +31,7 @@ class SheetActivity : AppCompatActivity() {
     lateinit var adapter:ArrayAdapter<*>
     lateinit var viewModel : attendenceViewmodel
     private var cid:Int = 0
+    private var className:String = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sheet)
@@ -42,6 +44,7 @@ class SheetActivity : AppCompatActivity() {
         viewModel = ViewModelProvider(this,viewModelFactory).get(attendenceViewmodel::class.java)
 
         cid = intent.getIntExtra(CID,-1)
+        className = intent.getStringExtra(CLASS_NAME).toString()
 
       /*  val sidArray = intent.getIntArrayExtra(SIDARRAY)
         val nameArray = intent.getStringArrayExtra(NAMEARRAY)
@@ -64,6 +67,7 @@ class SheetActivity : AppCompatActivity() {
     private fun openSheetActivity(position:Int) {
         val intent = Intent(this,SheetPdfActivity::class.java)
         intent.putExtra(MONTH,listItems.get(position).toString())
+        intent.putExtra(CLASS_NAME,className)
         startActivity(intent)
     }
 

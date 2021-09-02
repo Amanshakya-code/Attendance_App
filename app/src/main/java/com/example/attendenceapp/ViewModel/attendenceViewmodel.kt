@@ -37,21 +37,17 @@ class attendenceViewmodel(app:Application,private val repository: repository): A
         }
     }
 
-    fun getStatus(sid:Int,date:String) = viewModelScope.launch {
+    /*fun getStatus(sid:Int,date:String) = viewModelScope.launch {
         val status = repository.getStatus(sid,date)
         Log.i("anany","$sid --- > $status")
         map.put(sid,status)
         statusView.postValue(map)
-    }
+    }*/
+
+    fun getStatus(sid: Int,date: String) = repository.getStatus(sid,date)
 
 
-    fun getStatusForSheet(sid: Int,date: String) = viewModelScope.launch {
-        val status = repository.getStatus(sid,date)
-        sheetmap.put(date,status)
-        Log.i("sisi","$sheetmap")
-        sheetStatus.postValue(sheetmap)
 
-    }
 
     fun getALlDistinctMonthData(cid:Int) = repository.getAllDistinctMonths(cid)
 

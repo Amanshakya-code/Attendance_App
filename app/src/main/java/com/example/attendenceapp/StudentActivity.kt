@@ -114,16 +114,20 @@ class StudentActivity : AppCompatActivity() {
            val student = StudentList.get(i)
            val currentStudentSid = student.Sid!!
            Log.i("chaman","$currentStudentSid")
-           viewModel.getStatus(currentStudentSid,date)
+           viewModel.getStatus(currentStudentSid,date).observe(this, Observer {
+               if(it!=null){
+                   student.status = it.status
+               }
+           })
        }
 
-        viewModel.statusView.observe(this, Observer {
+      /*  viewModel.statusView.observe(this, Observer {
 
             if(it.size == StudentList.size){
                 Log.i("daks","$it")
                 attendance(it)
             }
-        })
+        })*/
         adapter.differ.submitList(StudentList)
         Log.i("statusfos","$StudentList")
         adapter.notifyDataSetChanged()
@@ -222,6 +226,7 @@ class StudentActivity : AppCompatActivity() {
                    */
                     val intent = Intent(this,SheetActivity::class.java)
                     intent.putExtra(CID,cid)
+                    intent.putExtra(CLASS_NAME,className)
                   /*  intent.putExtra(SIDARRAY,sidArray)
                     intent.putExtra(ROLLARRAY,rollnumArray)
                     intent.putExtra(NAMEARRAY,nameArray)*/
