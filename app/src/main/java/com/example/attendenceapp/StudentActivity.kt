@@ -18,8 +18,15 @@ import com.example.attendenceapp.Adapter.StudentAdapter
 import com.example.attendenceapp.Constant.constant.Companion.CID
 
 import com.example.attendenceapp.Constant.constant.Companion.CLASS_NAME
+import com.example.attendenceapp.Constant.constant.Companion.NAMEARRAY
 import com.example.attendenceapp.Constant.constant.Companion.POSITION
+import com.example.attendenceapp.Constant.constant.Companion.ROLLARRAY
+import com.example.attendenceapp.Constant.constant.Companion.SIDARRAY
 import com.example.attendenceapp.Constant.constant.Companion.SUBJECT_NAME
+
+import com.example.attendenceapp.Constant.constant.Companion.nameArray
+import com.example.attendenceapp.Constant.constant.Companion.rollnumArray
+import com.example.attendenceapp.Constant.constant.Companion.sidArray
 import com.example.attendenceapp.DataBase.DatabaseInstance
 import com.example.attendenceapp.Model.StudentEntity
 import com.example.attendenceapp.Model.StudentItem
@@ -117,7 +124,6 @@ class StudentActivity : AppCompatActivity() {
                 attendance(it)
             }
         })
-
         adapter.differ.submitList(StudentList)
         Log.i("statusfos","$StudentList")
         adapter.notifyDataSetChanged()
@@ -195,8 +201,30 @@ class StudentActivity : AppCompatActivity() {
 
                 }
                 R.id.attendanceSheet->{
+
+                        sidArray = Array<Int>(StudentList.size){0}
+                    nameArray = Array<String>(StudentList.size){""}
+                    rollnumArray = Array<String>(StudentList.size){""}
+
+                    for(i in 0..StudentList.size-1){
+                        sidArray[i] = StudentList.get(i).Sid!!
+                    }
+                    for(i in 0..StudentList.size-1){
+                        nameArray[i] = StudentList.get(i).stname
+                    }
+                    for(i in 0..StudentList.size-1){
+                        rollnumArray[i] = StudentList.get(i).st_roll
+                    }
+
+
+                   /* var bundleInt = Bundle()
+                    bundleInt.putIntArray(SIDARRAY,sidArray)
+                   */
                     val intent = Intent(this,SheetActivity::class.java)
                     intent.putExtra(CID,cid)
+                  /*  intent.putExtra(SIDARRAY,sidArray)
+                    intent.putExtra(ROLLARRAY,rollnumArray)
+                    intent.putExtra(NAMEARRAY,nameArray)*/
                     startActivity(intent)
                 }
             }

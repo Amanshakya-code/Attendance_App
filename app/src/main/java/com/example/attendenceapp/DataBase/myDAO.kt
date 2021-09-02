@@ -28,10 +28,14 @@ interface myDAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun upsertStatus(statusEntity: statusEntity)
 
-    @Query("SElECT status FROM statustb WHERE SID==:sid AND date ==:date")
+    @Query("SElECT status FROM statustb WHERE SID LIKE :sid AND date LIKE :date")
     suspend fun getStatus(sid:Int,date:String):String
 
     @Query("SELECT date FROM statustb WHERE CID==:cid GROUP BY substr(date,3,8)")
     fun getDistinctMonth(cid:Int):LiveData<List<String>>
+
+    @Query("SElECT * FROM statustb WHERE SID LIKE :sid AND date LIKE :date")
+    fun getstatusforSheet(sid:Int,date:String):LiveData<statusEntity>
+
 
 }
