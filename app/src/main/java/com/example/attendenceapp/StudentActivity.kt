@@ -35,6 +35,7 @@ import com.example.attendenceapp.Repository.repository
 import com.example.attendenceapp.ViewModel.attendenceViewmodel
 import com.example.attendenceapp.ViewModel.viewModelFactory
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.android.material.snackbar.Snackbar
 
 import kotlinx.android.synthetic.main.activity_student.*
 import kotlinx.android.synthetic.main.class_item.view.*
@@ -180,7 +181,7 @@ class StudentActivity : AppCompatActivity() {
                 val status = statusEntity(null,cid,student.Sid!!,date,state)
                 viewModel.saveStatus(status)
             }
-
+            Toast.makeText(this,"Data Store",Toast.LENGTH_SHORT).show()
         }
         toolbar.inflateMenu(R.menu.menu)
         toolbar.setOnMenuItemClickListener {
@@ -195,6 +196,12 @@ class StudentActivity : AppCompatActivity() {
                             val sdf = SimpleDateFormat(myformat)
                             date = sdf.format(myCalendar.time)
                             toolbar_student.subtitle_toolbar.text = date.toString()
+                            for(student in StudentList){
+                                student.status = ""
+                            }
+                            adapter.differ.submitList(StudentList)
+                            adapter.notifyDataSetChanged()
+
                         }
                     val datePickerDialog = DatePickerDialog(
                         this, dateSetListener, myCalendar.get(Calendar.YEAR),

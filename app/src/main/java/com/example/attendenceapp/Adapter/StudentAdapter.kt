@@ -1,5 +1,6 @@
 package com.example.attendenceapp.Adapter
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -38,18 +39,23 @@ class StudentAdapter :RecyclerView.Adapter<StudentAdapter.StudentViewHolder>() {
             student_name.text = student.stname
             student_status.text = student.status
             student_rollnumber.text = student.st_roll
-
+            if(student.status == "P"){
+                student_cardView.setCardBackgroundColor(Color.parseColor("#A6D66E"))
+            }
+            else if(student.status == "A"){
+                student_cardView.setCardBackgroundColor(Color.parseColor("#F6707D"))
+            }
             student_cardView.setOnClickListener {
                 var currentStatus = student.status
                 if(currentStatus == "P")
                 {
                     currentStatus = "A"
-                   // student_cardView.setCardBackgroundColor(Color.parseColor("#F6707D"))
+                    student_cardView.setCardBackgroundColor(Color.parseColor("#F6707D"))
                 }
                 else
                 {
                     currentStatus = "P"
-                    //student_cardView.setCardBackgroundColor(Color.parseColor("#A6D66E"))
+                    student_cardView.setCardBackgroundColor(Color.parseColor("#A6D66E"))
                 }
                 student.status = currentStatus
                 notifyDataSetChanged()
