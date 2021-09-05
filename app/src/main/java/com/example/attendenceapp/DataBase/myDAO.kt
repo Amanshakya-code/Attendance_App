@@ -37,5 +37,4 @@ interface myDAO {
     @Query("SElECT * FROM statustb WHERE SID LIKE :sid AND date LIKE :date")
     fun getstatusforSheet(sid:Int,date:String):LiveData<statusEntity>
 
-
 }

@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:requestLegacyExternalStorage="true"
         android:theme="@style/Theme.AttendanceApp">
-        <activity android:name=".SheetPdfActivity"></activity>
+        <activity android:name=".SheetPdfActivity"/>
         <activity android:name=".SheetActivity" />
         <activity android:name=".StudentActivity" />
         <activity android:name=".MainActivity">

@@ -147,19 +147,16 @@ class SheetPdfActivity : AppCompatActivity() {
         }
         tableLayout.showDividers = TableLayout.SHOW_DIVIDER_MIDDLE
 
-
-
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if ((checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED)
-            ) {
-                val permissionWrite = arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                requestPermissions(
-                    permissionWrite,
-                    1002
-                ) // GIVE AN INTEGER VALUE FOR PERMISSION_CODE_WRITE LIKE 1002
-            } else {
-                pdf_toolbar.saveBtn.setOnClickListener {
+        pdf_toolbar.saveBtn.setOnClickListener {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                if ((checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED)
+                ) {
+                    val permissionWrite = arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                    requestPermissions(
+                        permissionWrite,
+                        1002
+                    ) // GIVE AN INTEGER VALUE FOR PERMISSION_CODE_WRITE LIKE 1002
+                } else {
                     val pdfPath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
                     var file = File(pdfPath,"Attendance.pdf")
                     var pdfWriter = PdfWriter(file)
@@ -187,18 +184,11 @@ class SheetPdfActivity : AppCompatActivity() {
                     document.add(subtitle)
                     document.add(table)
                     document.close()
-                    Toast.makeText(this,"Download the pdf",Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this,"Pdf Downloaded",Toast.LENGTH_SHORT).show()
+
                 }
             }
         }
-    }
-
-    private fun checkPermissionForFile() {
-
-    }
-
-    private fun downLoadFile() {
-        TODO("Not yet implemented")
     }
 
     private fun getDayInMonth(fulldate: String): Int {
