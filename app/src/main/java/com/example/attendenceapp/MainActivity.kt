@@ -15,7 +15,7 @@ import com.example.attendenceapp.ViewModel.attendenceViewmodel
 import com.example.attendenceapp.ViewModel.viewModelFactory
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.dialog.view.*
+import kotlinx.android.synthetic.main.dialogue1.view.*
 import kotlinx.android.synthetic.main.toolbar.view.*
 
 class MainActivity : AppCompatActivity() {
@@ -32,10 +32,10 @@ class MainActivity : AppCompatActivity() {
         val viewModelFactory = viewModelFactory(application,respository = repository)
         viewModel = ViewModelProvider(this,viewModelFactory).get(attendenceViewmodel::class.java)
 
-
         AddSubjectFb.setOnClickListener {
             showDailog()
         }
+
         classrecyclerView.layoutManager = LinearLayoutManager(this)
         classList = arrayListOf()
         adapter = classAdapter()
@@ -43,6 +43,11 @@ class MainActivity : AppCompatActivity() {
         setToolBar()
 
         viewModel.getClassData().observe(this, Observer {
+
+            if(it.isEmpty()){
+
+            }
+
             adapter.differ.submitList(it)
             adapter.notifyDataSetChanged()
         })
@@ -57,18 +62,19 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun showDailog() {
-        val dialogView = LayoutInflater.from(this).inflate(R.layout.dialog,null)
-        val alertDialog = MaterialAlertDialogBuilder(this, R.style.CustomMaterialDialog)
+        val dialogView = LayoutInflater.from(this).inflate(R.layout.dialogue1,null)
+        val alertDialog = MaterialAlertDialogBuilder(this)
             .setView(dialogView)
             .show()
 
-        dialogView.cancel.setOnClickListener {
+        dialogView.cancel_btn.setOnClickListener {
             alertDialog.dismiss()
         }
-        dialogView.addsubjectbtn.setOnClickListener {
-            if(dialogView.et01.text.toString().isNotEmpty() && dialogView.etd02.text.toString().isNotEmpty())
+
+        dialogView.add_subject_btn.setOnClickListener {
+            if(dialogView.subject_input.text.toString().isNotEmpty() && dialogView.course_input.text.toString().isNotEmpty())
             {
-                val classitem = ClassItem(null,dialogView.et01.text.toString(),dialogView.etd02.text.toString())
+                val classitem = ClassItem(null,dialogView.subject_input.text.toString(),dialogView.course_input.text.toString())
                 viewModel.saveClassData(classitem)
                 alertDialog.dismiss()
             }

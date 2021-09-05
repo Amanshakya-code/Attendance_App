@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="preloaded_fonts" translatable="false">
+        <item>@font/aldrich</item>
+        <item>@font/belgrano</item>
+        <item>@font/biorhyme</item>
+        <item>@font/biorhyme_extralight</item>
+        <item>@font/crimson_text</item>
+        <item>@font/droid_serif</item>
+    </array>
+</resources>

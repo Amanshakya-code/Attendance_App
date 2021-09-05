@@ -1,5 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/blehj/app/src/main/res/drawable-v24/absent.xml" value="0.1" />
+        <entry key="..\:/blehj/app/src/main/res/drawable-v24/back.xml" value="0.1" />
+        <entry key="..\:/blehj/app/src/main/res/drawable-v24/back1.xml" value="0.1" />
+        <entry key="..\:/blehj/app/src/main/res/drawable-v24/calendar.xml" value="0.1" />
+        <entry key="..\:/blehj/app/src/main/res/drawable-v24/course.xml" value="0.1" />
+        <entry key="..\:/blehj/app/src/main/res/drawable-v24/curved_button.xml" value="0.1" />
+        <entry key="..\:/blehj/app/src/main/res/drawable-v24/present.xml" value="0.1" />
+        <entry key="..\:/blehj/app/src/main/res/drawable-v24/refresh.xml" value="0.1" />
+        <entry key="..\:/blehj/app/src/main/res/drawable-v24/save.xml" value="0.1" />
+        <entry key="..\:/blehj/app/src/main/res/drawable-v24/subject.xml" value="0.1" />
+        <entry key="..\:/blehj/app/src/main/res/drawable-v24/unknown.xml" value="0.1" />
+        <entry key="..\:/blehj/app/src/main/res/layout/activity_main.xml" value="0.2552083333333333" />
+        <entry key="..\:/blehj/app/src/main/res/layout/activity_sheet.xml" value="0.1" />
+        <entry key="..\:/blehj/app/src/main/res/layout/activity_sheet_pdf.xml" value="0.1" />
+        <entry key="..\:/blehj/app/src/main/res/layout/activity_student.xml" value="0.1" />
+        <entry key="..\:/blehj/app/src/main/res/layout/class_item.xml" value="0.22244094488188976" />
+        <entry key="..\:/blehj/app/src/main/res/layout/dialog.xml" value="0.2552083333333333" />
+        <entry key="..\:/blehj/app/src/main/res/layout/dialogue1.xml" value="0.2" />
+        <entry key="..\:/blehj/app/src/main/res/layout/sheet_list.xml" value="0.28397212543554007" />
+        <entry key="..\:/blehj/app/src/main/res/layout/student_item.xml" value="0.176" />
+        <entry key="..\:/blehj/app/src/main/res/layout/toolbar.xml" value="0.3773148148148148" />
+      </map>
+    </option>
+  </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>

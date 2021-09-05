@@ -1,35 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    android:layout_marginTop="3dp"
+    android:layout_marginBottom="3dp"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="96dp"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
     <androidx.cardview.widget.CardView
+        android:layout_margin="1dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/singleCardView"
+        android:layout_marginTop="3dp"
+        android:layout_marginBottom="3dp"
         app:cardCornerRadius="20dp"
-        android:elevation="10dp">
+        android:elevation="15dp">
+
         <LinearLayout
-            android:padding="16dp"
+            android:padding="10dp"
             android:layout_centerVertical="true"
             android:layout_width="wrap_content"
             android:orientation="vertical"
             android:layout_height="wrap_content">
+
             <TextView
                 android:id="@+id/class_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Class Name"
-                android:textSize="20sp"
-                android:textColor="@color/black"/>
+                android:fontFamily="@font/biorhyme"
+                android:textColor="@color/black"
+                android:textSize="24sp"
+                tools:text="Class Name" />
+
             <TextView
                 android:id="@+id/subject_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Subject Name"
-                android:textSize="20sp"
-                android:textColor="@color/grey"/>
+                android:textColor="@color/grey"
+                android:textSize="16sp"
+                tools:text="Subject Name"
+                android:fontFamily="@font/aldrich"/>
+
         </LinearLayout>
+
     </androidx.cardview.widget.CardView>
 
 

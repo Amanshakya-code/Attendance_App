@@ -6,10 +6,13 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".SheetActivity">
+
     <include
         android:id="@+id/sheet_Toolbar"
         layout="@layout/toolbar"/>
+
     <ListView
+        android:layout_margin="10dp"
         android:id="@+id/sheetList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

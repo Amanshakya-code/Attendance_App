@@ -4,6 +4,7 @@ import android.app.DatePickerDialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.InputType
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.Menu
@@ -38,8 +39,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 
 import kotlinx.android.synthetic.main.activity_student.*
-import kotlinx.android.synthetic.main.class_item.view.*
-import kotlinx.android.synthetic.main.dialog.view.*
+import kotlinx.android.synthetic.main.dialogue1.view.*
 import kotlinx.android.synthetic.main.toolbar.*
 import kotlinx.android.synthetic.main.toolbar.view.*
 import kotlinx.coroutines.delay
@@ -89,6 +89,9 @@ class StudentActivity : AppCompatActivity() {
         viewModel.getAllStudent(cid).observe(this, Observer {
             StudentList.clear()
             Log.i("check","$it")
+
+
+
             adapter.differ.submitList(it)
 
             adapter.notifyDataSetChanged()
@@ -100,6 +103,7 @@ class StudentActivity : AppCompatActivity() {
 
         })
         loadStatus.setOnClickListener {
+            Toast.makeText(this, "Refreshing...", Toast.LENGTH_SHORT).show()
             loadStatus()
         }
     }
@@ -108,27 +112,27 @@ class StudentActivity : AppCompatActivity() {
 
     private fun loadStatus() {
 
-       Log.i("statusfos","$date")
+        Log.i("statusfos","$date")
 
 
-       for(i in 0..StudentList.size-1){
-           val student = StudentList.get(i)
-           val currentStudentSid = student.Sid!!
-           Log.i("chaman","$currentStudentSid")
-           viewModel.getStatus(currentStudentSid,date).observe(this, Observer {
-               if(it!=null){
-                   student.status = it.status
-               }
-           })
-       }
+        for(i in 0..StudentList.size-1){
+            val student = StudentList.get(i)
+            val currentStudentSid = student.Sid!!
+            Log.i("chaman","$currentStudentSid")
+            viewModel.getStatus(currentStudentSid,date).observe(this, Observer {
+                if(it!=null){
+                    student.status = it.status
+                }
+            })
+        }
 
-      /*  viewModel.statusView.observe(this, Observer {
+        /*  viewModel.statusView.observe(this, Observer {
 
-            if(it.size == StudentList.size){
-                Log.i("daks","$it")
-                attendance(it)
-            }
-        })*/
+              if(it.size == StudentList.size){
+                  Log.i("daks","$it")
+                  attendance(it)
+              }
+          })*/
         adapter.differ.submitList(StudentList)
         Log.i("statusfos","$StudentList")
         adapter.notifyDataSetChanged()
@@ -140,38 +144,44 @@ class StudentActivity : AppCompatActivity() {
             var currentStudentSid = student.Sid
             var status = mp.get(currentStudentSid)
             if(status!=null)
-            student.status = status!!
+                student.status = status!!
         }
     }
 
     private fun showDailog() {
-        val dialogView = LayoutInflater.from(this).inflate(R.layout.dialog,null)
+        val dialogView = LayoutInflater.from(this).inflate(R.layout.dialogue1,null)
         dialogView.title_dialog.text = "Add Student"
-        dialogView.et01.hint = "Enter RollNumber"
-        dialogView.etd02.hint = "Enter Name"
+        dialogView.Text_input_layout_subject.hint = "Roll Number"
+        dialogView.Text_input_layout_course.hint = "Name"
 
-        val alertDialog = MaterialAlertDialogBuilder(this, R.style.CustomMaterialDialog)
+        dialogView.subject_input.inputType = InputType.TYPE_CLASS_NUMBER
+
+        val alertDialog = MaterialAlertDialogBuilder(this)
             .setView(dialogView)
             .show()
 
-        dialogView.cancel.setOnClickListener {
-            alertDialog.dismiss()
-        }
+        dialogView.cancel_btn.setOnClickListener(View.OnClickListener {
 
-        dialogView.addsubjectbtn.setOnClickListener {
-            if(dialogView.et01.text.toString().isNotEmpty() && dialogView.etd02.text.toString().isNotEmpty())
+            alertDialog.dismiss()
+
+        })
+
+        dialogView.add_subject_btn.setOnClickListener {
+            if(dialogView.subject_input.text.toString().isNotEmpty() && dialogView.course_input.text.toString().isNotEmpty())
             {
-                val student = StudentEntity(null, cid,dialogView.et01.text.toString(),dialogView.etd02.text.toString())
+                val student = StudentEntity(null, cid,dialogView.subject_input.text.toString(),dialogView.course_input.text.toString())
                 viewModel.saveStudentData(student)
                 alertDialog.dismiss()
             }
         }
     }
+
+
     private fun setToolBar() {
         toolbar_student.title_toolbar.text = className
         toolbar_student.subtitle_toolbar.text = date
         toolbar_student.backbutton.setOnClickListener {
-           onBackPressed()
+            onBackPressed()
         }
         toolbar_student.saveBtn.setOnClickListener {
             for(student in StudentList)
@@ -181,7 +191,7 @@ class StudentActivity : AppCompatActivity() {
                 val status = statusEntity(null,cid,student.Sid!!,date,state)
                 viewModel.saveStatus(status)
             }
-            Toast.makeText(this,"Data Store",Toast.LENGTH_SHORT).show()
+            Toast.makeText(this,"Saved" , Toast.LENGTH_SHORT).show()
         }
         toolbar.inflateMenu(R.menu.menu)
         toolbar.setOnMenuItemClickListener {
@@ -207,13 +217,13 @@ class StudentActivity : AppCompatActivity() {
                         this, dateSetListener, myCalendar.get(Calendar.YEAR),
                         myCalendar.get(Calendar.MONTH), myCalendar.get(Calendar.DAY_OF_MONTH)
                     )
-                        //datePickerDialog.datePicker.minDate = System.currentTimeMillis()
+                    //datePickerDialog.datePicker.minDate = System.currentTimeMillis()
                     datePickerDialog.show()
 
                 }
                 R.id.attendanceSheet->{
 
-                        sidArray = Array<Int>(StudentList.size){0}
+                    sidArray = Array<Int>(StudentList.size){0}
                     nameArray = Array<String>(StudentList.size){""}
                     rollnumArray = Array<String>(StudentList.size){""}
 
@@ -228,15 +238,15 @@ class StudentActivity : AppCompatActivity() {
                     }
 
 
-                   /* var bundleInt = Bundle()
-                    bundleInt.putIntArray(SIDARRAY,sidArray)
-                   */
+                    /* var bundleInt = Bundle()
+                     bundleInt.putIntArray(SIDARRAY,sidArray)
+                    */
                     val intent = Intent(this,SheetActivity::class.java)
                     intent.putExtra(CID,cid)
                     intent.putExtra(CLASS_NAME,className)
-                  /*  intent.putExtra(SIDARRAY,sidArray)
-                    intent.putExtra(ROLLARRAY,rollnumArray)
-                    intent.putExtra(NAMEARRAY,nameArray)*/
+                    /*  intent.putExtra(SIDARRAY,sidArray)
+                      intent.putExtra(ROLLARRAY,rollnumArray)
+                      intent.putExtra(NAMEARRAY,nameArray)*/
                     startActivity(intent)
                 }
             }
