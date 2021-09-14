@@ -33,9 +33,9 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:id="@+id/Text_input_layout_subject"
         android:layout_width="match_parent"
-        android:hint="Subject"
+        android:hint="Course"
         app:counterEnabled="true"
-        app:counterMaxLength="2"
+        app:counterMaxLength="30"
         app:startIconDrawable="@drawable/subject"
         android:layout_height="wrap_content"
         android:layout_below="@id/title_dialog"
@@ -49,7 +49,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="text"
-            android:maxLength="2" />
+            android:maxLength="30" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -58,9 +58,9 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:id="@+id/Text_input_layout_course"
         android:layout_width="match_parent"
-        android:hint="Course"
+        android:hint="Course Code"
         app:counterEnabled="true"
-        app:counterMaxLength="10"
+        app:counterMaxLength="30"
         app:startIconDrawable="@drawable/course"
         android:layout_height="wrap_content"
         app:endIconMode="clear_text"
@@ -70,7 +70,7 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:inputType="text"
-            android:maxLength="10"
+            android:maxLength="30"
             android:id="@+id/course_input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>

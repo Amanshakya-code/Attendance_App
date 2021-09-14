@@ -2,10 +2,7 @@ package com.example.attendenceapp.DataBase
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import com.example.attendenceapp.Model.ClassItem
 import com.example.attendenceapp.Model.StudentEntity
 import com.example.attendenceapp.Model.statusEntity
@@ -36,5 +33,26 @@ interface myDAO {
 
     @Query("SElECT * FROM statustb WHERE SID LIKE :sid AND date LIKE :date")
     fun getstatusforSheet(sid:Int,date:String):LiveData<statusEntity>
+
+    @Update
+    suspend fun updateClass(classItem: ClassItem)
+
+    @Query("DELETE FROM class WHERE C_id==:cid")
+    suspend fun deleteClass(cid:Int)
+
+    @Query("DELETE FROM statustb WHERE CID==:cid")
+    suspend fun deleteAllstatusFromClass(cid:Int)
+
+    @Query("DELETE FROM student WHERE c_id==:cid")
+    suspend fun deleteAllStudentFromClass(cid:Int)
+
+    @Update
+    suspend fun updateStudent(studentEntity: StudentEntity)
+
+    @Query("DELETE FROM student WHERE Sid==:sid")
+    suspend fun deleteStudent(sid: Int)
+
+    @Query("DELETE FROM statustb WHERE SID==:sid")
+    suspend fun deleteStudentStatus(sid:Int)
 
 }

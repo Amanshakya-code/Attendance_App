@@ -80,7 +80,7 @@ class StudentActivity : AppCompatActivity() {
 
         student_recylerView.layoutManager = LinearLayoutManager(this)
         StudentList = arrayListOf()
-        adapter = StudentAdapter()
+        adapter = StudentAdapter(viewModel)
         student_recylerView.adapter = adapter
         addstudentfb.setOnClickListener {
             showDailog()

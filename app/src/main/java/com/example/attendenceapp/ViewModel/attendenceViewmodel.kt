@@ -29,6 +29,46 @@ class attendenceViewmodel(app:Application,private val repository: repository): A
             repository.upsertStudentItem(studentEntity)
         }
     }
+
+    fun updateClassDetails(classItem: ClassItem){
+        viewModelScope.launch {
+            repository.updateClassdetails(classItem)
+        }
+    }
+
+
+    fun deleteClass(cid:Int){
+        viewModelScope.launch {
+            repository.deleteClass(cid)
+        }
+    }
+    fun deleteStudentFromClass(cid:Int){
+        viewModelScope.launch {
+            repository.deleteStudentFromClass(cid)
+        }
+    }
+    fun deleteStatusFromClass(cid:Int){
+        viewModelScope.launch {
+            repository.deleteStatusFromClass(cid)
+        }
+    }
+    fun updateStudent(studentEntity: StudentEntity){
+        viewModelScope.launch {
+            repository.updateStudent(studentEntity)
+        }
+    }
+    fun deleteStudent(sid:Int){
+        viewModelScope.launch {
+            repository.deleteStudent(sid)
+        }
+    }
+    fun deleteStudentStatus(sid:Int){
+        viewModelScope.launch {
+            repository.deleteStatusForStudent(sid)
+        }
+    }
+
+
     fun getAllStudent(cid:Int) = repository.getAllStudentData(cid)
 
     fun saveStatus(statusEntity: statusEntity){

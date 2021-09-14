@@ -15,6 +15,5 @@ class constant {
         var sidArray = arrayOf(T)
         var nameArray = arrayOf<String>()
         var rollnumArray = arrayOf<String>()
-
     }
 }

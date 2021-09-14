@@ -13,7 +13,6 @@ class repository(val db:DatabaseInstance) {
 
     fun getAllClassdata() = db.getmyDao().getAllSubject()
 
-
     suspend fun upsertStudentItem(studentEntity: StudentEntity){
         db.getmyDao().upsertStudentItem(studentEntity)
     }
@@ -24,10 +23,36 @@ class repository(val db:DatabaseInstance) {
         db.getmyDao().upsertStatus(statusEntity)
     }
 
+    suspend fun updateClassdetails(classItem: ClassItem){
+        db.getmyDao().updateClass(classItem)
+    }
+
     fun getStatus(sid:Int,date:String) =  db.getmyDao().getStatus(sid,date)
 
     fun getAllDistinctMonths(cid:Int) = db.getmyDao().getDistinctMonth(cid)
 
-
     fun getAllsheetstatus(sid:Int,date:String) = db.getmyDao().getstatusforSheet(sid,date)
+
+    suspend fun deleteClass(cid:Int){
+        db.getmyDao().deleteClass(cid)
+    }
+    suspend fun deleteStudentFromClass(cid:Int){
+        db.getmyDao().deleteAllStudentFromClass(cid)
+    }
+    suspend fun deleteStatusFromClass(cid:Int){
+        db.getmyDao().deleteAllstatusFromClass(cid)
+    }
+
+    suspend fun updateStudent(studentEntity:StudentEntity){
+        db.getmyDao().updateStudent(studentEntity)
+    }
+    suspend fun deleteStudent(sid:Int){
+        db.getmyDao().deleteStudent(sid)
+    }
+    suspend fun deleteStatusForStudent(sid:Int){
+        db.getmyDao().deleteStudentStatus(sid)
+    }
+
+
+
 }

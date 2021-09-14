@@ -38,7 +38,7 @@ class MainActivity : AppCompatActivity() {
 
         classrecyclerView.layoutManager = LinearLayoutManager(this)
         classList = arrayListOf()
-        adapter = classAdapter()
+        adapter = classAdapter(viewModel)
         classrecyclerView.adapter = adapter
         setToolBar()
 
