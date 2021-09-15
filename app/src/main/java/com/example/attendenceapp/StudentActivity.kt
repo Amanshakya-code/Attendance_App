@@ -106,8 +106,23 @@ class StudentActivity : AppCompatActivity() {
             Toast.makeText(this, "Refreshing...", Toast.LENGTH_SHORT).show()
             loadStatus()
         }
+
+
+        loadTotalstatus(date)
     }
 
+    private fun loadTotalstatus(datell:String) {
+        viewModel.getClassStatus(cid,datell,"P").observe(this, androidx.lifecycle.Observer {
+            if(it!=null){
+                totalpresent.text = "Total Present = $it"
+            }
+        })
+        viewModel.getClassStatus(cid,datell,"A").observe(this, androidx.lifecycle.Observer {
+            if (it != null) {
+                totalAbsent.text = "Total Absent = $it"
+            }
+        })
+    }
 
 
     private fun loadStatus() {
@@ -209,6 +224,7 @@ class StudentActivity : AppCompatActivity() {
                             for(student in StudentList){
                                 student.status = ""
                             }
+                            loadTotalstatus(date)
                             adapter.differ.submitList(StudentList)
                             adapter.notifyDataSetChanged()
 
@@ -220,6 +236,22 @@ class StudentActivity : AppCompatActivity() {
                     //datePickerDialog.datePicker.minDate = System.currentTimeMillis()
                     datePickerDialog.show()
 
+                }
+                R.id.markAllPresent->{
+                    for(st in StudentList)
+                    {
+                        st.status = "P"
+                    }
+                    adapter.differ.submitList(StudentList)
+                    adapter.notifyDataSetChanged()
+                }
+                R.id.markAllAbsent->{
+                    for(st in StudentList)
+                    {
+                        st.status = "A"
+                    }
+                    adapter.differ.submitList(StudentList)
+                    adapter.notifyDataSetChanged()
                 }
                 R.id.attendanceSheet->{
 

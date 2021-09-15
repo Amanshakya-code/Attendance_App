@@ -14,6 +14,7 @@ class attendenceViewmodel(app:Application,private val repository: repository): A
 
     var statusView:MutableLiveData<HashMap<Int,String>> = MutableLiveData()
     var sheetStatus:MutableLiveData<HashMap<String,String>> = MutableLiveData()
+    var getClassStatus:MutableLiveData<Int> = MutableLiveData()
     var sheetmap:HashMap<String,String> = HashMap()
     var map:HashMap<Int,String> = HashMap()
     fun saveClassData(classItem: ClassItem)
@@ -76,6 +77,8 @@ class attendenceViewmodel(app:Application,private val repository: repository): A
             repository.upsertStatus(statusEntity)
         }
     }
+
+    fun getClassStatus(Cid:Int,date: String,status:String) = repository.getClassStatus(Cid,date,status)
 
     /*fun getStatus(sid:Int,date:String) = viewModelScope.launch {
         val status = repository.getStatus(sid,date)

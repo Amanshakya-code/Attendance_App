@@ -53,6 +53,8 @@ class repository(val db:DatabaseInstance) {
         db.getmyDao().deleteStudentStatus(sid)
     }
 
+    fun getClassStatus(cid:Int,date:String,status:String) = db.getmyDao().getAllStatusOfStudent(cid,date,status)
+
 
 
 }

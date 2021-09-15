@@ -7,4 +7,10 @@
     <item
         android:id="@+id/attendanceSheet"
         android:title="Get Attendance Sheet"/>
+    <item
+        android:id="@+id/markAllPresent"
+        android:title="Mark All Present"/>
+    <item
+        android:id="@+id/markAllAbsent"
+        android:title="Mark All Absent"/>
 </menu>

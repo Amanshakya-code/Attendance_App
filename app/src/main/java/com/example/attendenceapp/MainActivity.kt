@@ -2,6 +2,7 @@ package com.example.attendenceapp
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import androidx.lifecycle.Observer
@@ -35,7 +36,6 @@ class MainActivity : AppCompatActivity() {
         AddSubjectFb.setOnClickListener {
             showDailog()
         }
-
         classrecyclerView.layoutManager = LinearLayoutManager(this)
         classList = arrayListOf()
         adapter = classAdapter(viewModel)

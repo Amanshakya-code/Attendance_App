@@ -44,25 +44,38 @@ class StudentAdapter(var viewModel:attendenceViewmodel) :RecyclerView.Adapter<St
         var student = differ.currentList[position]
         holder.itemView.apply {
             student_name.text = student.stname
-            student_status.text = student.status
-            student_rollnumber.text = student.st_roll
             if(student.status == "P"){
+                student_status_present.text = "P"
+                student_status_present.visibility = View.VISIBLE
+                student_status_absent.visibility = View.GONE
+            }
+            else if(student.status == "A"){
+                student_status_absent.text = "A"
+                student_status_present.visibility = View.GONE
+                student_status_absent.visibility = View.VISIBLE
+            }
+            student_rollnumber.text = student.st_roll
+            /*if(student.status == "P"){
                 student_cardView.setCardBackgroundColor(Color.parseColor("#A6D66E"))
             }
             else if(student.status == "A"){
                 student_cardView.setCardBackgroundColor(Color.parseColor("#F6707D"))
-            }
+            }*/
             student_cardView.setOnClickListener {
                 var currentStatus = student.status
                 if(currentStatus == "P")
                 {
                     currentStatus = "A"
-                    student_cardView.setCardBackgroundColor(Color.parseColor("#F6707D"))
+                    student_status_absent.text = "A"
+                    student_status_present.visibility = View.GONE
+                    student_status_absent.visibility = View.VISIBLE
                 }
-                else
+                else if(currentStatus == "" || currentStatus == "A")
                 {
                     currentStatus = "P"
-                    student_cardView.setCardBackgroundColor(Color.parseColor("#A6D66E"))
+                    student_status_present.text = "P"
+                    student_status_present.visibility = View.VISIBLE
+                    student_status_absent.visibility = View.GONE
                 }
                 student.status = currentStatus
                 notifyDataSetChanged()

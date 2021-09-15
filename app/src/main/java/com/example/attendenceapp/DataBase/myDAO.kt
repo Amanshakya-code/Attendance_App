@@ -55,4 +55,11 @@ interface myDAO {
     @Query("DELETE FROM statustb WHERE SID==:sid")
     suspend fun deleteStudentStatus(sid:Int)
 
+    @Query("SELECT COUNT(*) FROM statustb WHERE status==:attendence AND SID==:sid")
+    fun PresentCountOfStudent(sid:Int,attendence:String):Int
+
+    @Query("SELECT COUNT(*) FROM statustb WHERE CID==:cid AND date LIKE :date AND status==:status")
+    fun getAllStatusOfStudent(cid:Int,date:String,status:String):LiveData<Int>
+
+
 }

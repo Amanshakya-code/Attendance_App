@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.content.ContentProviderCompat.requireContext
+import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -15,6 +16,7 @@ import com.example.attendenceapp.Constant.constant.Companion.CID
 import com.example.attendenceapp.Constant.constant.Companion.CLASS_NAME
 import com.example.attendenceapp.Constant.constant.Companion.POSITION
 import com.example.attendenceapp.Constant.constant.Companion.SUBJECT_NAME
+import com.example.attendenceapp.MainActivity
 import com.example.attendenceapp.Model.ClassItem
 import com.example.attendenceapp.Model.StudentEntity
 import com.example.attendenceapp.StudentActivity
@@ -23,9 +25,14 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.android.synthetic.main.choice_dialog.view.*
 import kotlinx.android.synthetic.main.class_item.view.*
 import kotlinx.android.synthetic.main.dialogue1.view.*
+import java.text.SimpleDateFormat
+import java.util.*
 
 class classAdapter(var viewModel:attendenceViewmodel): RecyclerView.Adapter<classAdapter.myclassViewHolder>() {
 
+    val currenttime = Calendar.getInstance().time
+    val fm = SimpleDateFormat("dd-MMM-yyyy", Locale.getDefault())
+    var date = fm.format(currenttime)
     inner class myclassViewHolder(itemView:View) : RecyclerView.ViewHolder(itemView)
 
     private val differcall = object: DiffUtil.ItemCallback<ClassItem>(){
@@ -48,7 +55,6 @@ class classAdapter(var viewModel:attendenceViewmodel): RecyclerView.Adapter<clas
         holder.itemView.apply {
             class_tv.text = classIem.ClassName
             subject_tv.text = classIem.SubjectName
-
             singleCardView.setOnClickListener {
                 val intent = Intent(singleCardView.context,StudentActivity::class.java)
                 intent.putExtra(CLASS_NAME,classIem.ClassName)
@@ -104,6 +110,24 @@ class classAdapter(var viewModel:attendenceViewmodel): RecyclerView.Adapter<clas
                 }
                 true
             }
+           /* var tp = true
+            var ta = true;
+            viewModel.getClassStatus(classIem.C_id!!,date,"P").observe(lifecycleOwner, androidx.lifecycle.Observer {
+                if(it!=null && tp==true){
+                    presentCountTv.visibility = View.VISIBLE
+                    presentCountTv.text = it.toString()
+                    notifyDataSetChanged()
+                    tp = false
+                }
+            })
+            viewModel.getClassStatus(classIem.C_id!!,date,"A").observe(lifecycleOwner, androidx.lifecycle.Observer {
+                if(it!=null && ta==true){
+                    absentCountTv.visibility = View.VISIBLE
+                    absentCountTv.text = it.toString()
+                    notifyDataSetChanged()
+                    ta = false
+                }
+            })*/
         }
 
     }
