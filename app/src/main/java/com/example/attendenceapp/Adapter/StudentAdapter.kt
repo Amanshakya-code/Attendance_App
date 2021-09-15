@@ -19,6 +19,7 @@ import kotlinx.android.synthetic.main.choice_dialog.view.*
 import kotlinx.android.synthetic.main.class_item.view.*
 import kotlinx.android.synthetic.main.dialogue1.view.*
 import kotlinx.android.synthetic.main.student_item.view.*
+import java.util.*
 
 
 class StudentAdapter(var viewModel:attendenceViewmodel) :RecyclerView.Adapter<StudentAdapter.StudentViewHolder>() {
@@ -44,15 +45,18 @@ class StudentAdapter(var viewModel:attendenceViewmodel) :RecyclerView.Adapter<St
         var student = differ.currentList[position]
         holder.itemView.apply {
             student_name.text = student.stname
+
             if(student.status == "P"){
                 student_status_present.text = "P"
                 student_status_present.visibility = View.VISIBLE
                 student_status_absent.visibility = View.GONE
+                colorStudentView.setBackgroundColor(Color.parseColor("#A6D66E"))
             }
             else if(student.status == "A"){
                 student_status_absent.text = "A"
                 student_status_present.visibility = View.GONE
                 student_status_absent.visibility = View.VISIBLE
+                colorStudentView.setBackgroundColor(Color.parseColor("#EF5350"))
             }
             student_rollnumber.text = student.st_roll
             /*if(student.status == "P"){
@@ -69,6 +73,7 @@ class StudentAdapter(var viewModel:attendenceViewmodel) :RecyclerView.Adapter<St
                     student_status_absent.text = "A"
                     student_status_present.visibility = View.GONE
                     student_status_absent.visibility = View.VISIBLE
+                    colorStudentView.setBackgroundColor(Color.parseColor("#EF5350"))
                 }
                 else if(currentStatus == "" || currentStatus == "A")
                 {
@@ -76,9 +81,10 @@ class StudentAdapter(var viewModel:attendenceViewmodel) :RecyclerView.Adapter<St
                     student_status_present.text = "P"
                     student_status_present.visibility = View.VISIBLE
                     student_status_absent.visibility = View.GONE
+                    colorStudentView.setBackgroundColor(Color.parseColor("#A6D66E"))
                 }
                 student.status = currentStatus
-                notifyDataSetChanged()
+                //notifyDataSetChanged()
             }
             student_cardView.setOnLongClickListener {
                 val dialogView = LayoutInflater.from(student_cardView.context).inflate(R.layout.choice_dialog,null)

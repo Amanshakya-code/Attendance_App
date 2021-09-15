@@ -55,6 +55,9 @@ class classAdapter(var viewModel:attendenceViewmodel): RecyclerView.Adapter<clas
         holder.itemView.apply {
             class_tv.text = classIem.ClassName
             subject_tv.text = classIem.SubjectName
+            val colors = resources.getIntArray(R.array.random_color)
+            val randomColor = colors[Random().nextInt(colors.size)]
+            colorView.setBackgroundColor(randomColor)
             singleCardView.setOnClickListener {
                 val intent = Intent(singleCardView.context,StudentActivity::class.java)
                 intent.putExtra(CLASS_NAME,classIem.ClassName)
