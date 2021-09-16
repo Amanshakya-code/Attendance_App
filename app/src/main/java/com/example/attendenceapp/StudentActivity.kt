@@ -39,6 +39,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 
 import kotlinx.android.synthetic.main.activity_student.*
+import kotlinx.android.synthetic.main.class_item.view.*
 import kotlinx.android.synthetic.main.dialogue1.view.*
 import kotlinx.android.synthetic.main.toolbar.*
 import kotlinx.android.synthetic.main.toolbar.view.*
@@ -199,14 +200,25 @@ class StudentActivity : AppCompatActivity() {
             onBackPressed()
         }
         toolbar_student.saveBtn.setOnClickListener {
-            for(student in StudentList)
-            {
-                var state = student.status
-                if(state != "P") state = "A"
-                val status = statusEntity(null,cid,student.Sid!!,date,state)
-                viewModel.saveStatus(status)
-            }
-            Toast.makeText(this,"Saved" , Toast.LENGTH_SHORT).show()
+            MaterialAlertDialogBuilder(this, R.style.CustomMaterialDialog)
+                .setIcon(R.drawable.ic_baseline_save_24)
+                .setTitle("Do you want to save ?")
+                .setMessage("Your attendance will be retrieve by refreshing button")
+                .setPositiveButton("Yes") { _, _ ->
+                    for(student in StudentList)
+                    {
+                        var state = student.status
+                        if(state != "P") state = "A"
+                        val status = statusEntity(null,cid,student.Sid!!,date,state)
+                        viewModel.saveStatus(status)
+                    }
+                    Toast.makeText(this,"Saved" , Toast.LENGTH_SHORT).show()
+                }
+                .setNegativeButton("No") { _, _ ->
+
+                }
+                .show()
+
         }
         toolbar.inflateMenu(R.menu.menu)
         toolbar.setOnMenuItemClickListener {

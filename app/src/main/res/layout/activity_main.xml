@@ -6,9 +6,17 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <include
-        android:id="@+id/toolbar_main"
-        layout="@layout/toolbar" />
+    <TextView
+        android:id="@+id/toptitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:text="Attendance App"
+        android:textStyle="bold"
+        android:fontFamily="casual"
+        android:textColor="@color/black"
+        android:textSize="30sp" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:layout_width="wrap_content"
@@ -23,7 +31,7 @@
         android:id="@+id/classrecyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/toolbar_main"
+        android:layout_below="@+id/toptitle"
         android:padding="10dp"
         tools:listitem="@layout/class_item" />
 

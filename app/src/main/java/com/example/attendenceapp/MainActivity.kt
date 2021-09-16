@@ -1,5 +1,6 @@
 package com.example.attendenceapp
 
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -9,6 +10,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.attendenceapp.Adapter.classAdapter
+import com.example.attendenceapp.Constant.constant
 import com.example.attendenceapp.DataBase.DatabaseInstance
 import com.example.attendenceapp.Model.ClassItem
 import com.example.attendenceapp.Repository.repository
@@ -25,12 +27,19 @@ class MainActivity : AppCompatActivity() {
     private  lateinit var adapter:classAdapter
     lateinit var viewModel : attendenceViewmodel
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
+        val sharedPref = getSharedPreferences("mypref", Context.MODE_PRIVATE)
+        var editor = sharedPref.edit()
+        editor.apply{
+            putBoolean(constant.PREFKEY,true)
+            apply()
+        }
         val repository = repository(DatabaseInstance.getDatabaseInstance(this))
         val viewModelFactory = viewModelFactory(application,respository = repository)
+
         viewModel = ViewModelProvider(this,viewModelFactory).get(attendenceViewmodel::class.java)
 
         AddSubjectFb.setOnClickListener {
@@ -40,7 +49,6 @@ class MainActivity : AppCompatActivity() {
         classList = arrayListOf()
         adapter = classAdapter(viewModel)
         classrecyclerView.adapter = adapter
-        setToolBar()
 
         viewModel.getClassData().observe(this, Observer {
 
@@ -53,13 +61,14 @@ class MainActivity : AppCompatActivity() {
         })
 
     }
-    private fun setToolBar() {
+
+    /*private fun setToolBar() {
         toolbar_main.title_toolbar.text = "Attendance App"
         toolbar_main.subtitle_toolbar.visibility = View.GONE
         toolbar_main.backbutton.visibility = View.GONE
         toolbar_main.saveBtn.visibility = View.GONE
         toolbar_main.loadStatus.visibility = View.GONE
-    }
+    }*/
 
     private fun showDailog() {
         val dialogView = LayoutInflater.from(this).inflate(R.layout.dialogue1,null)
@@ -79,5 +88,9 @@ class MainActivity : AppCompatActivity() {
                 alertDialog.dismiss()
             }
         }
+    }
+
+    override fun onBackPressed() {
+
     }
 }

@@ -12,6 +12,7 @@ class constant {
         const val NAMEARRAY = "namearray"
         const val ROLLARRAY = "rollarray"
         const val MONTH = "month"
+        const val PREFKEY = "onboarding"
         var sidArray = arrayOf(T)
         var nameArray = arrayOf<String>()
         var rollnumArray = arrayOf<String>()

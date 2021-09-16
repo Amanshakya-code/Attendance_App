@@ -158,7 +158,7 @@ class SheetPdfActivity : AppCompatActivity() {
                     ) // GIVE AN INTEGER VALUE FOR PERMISSION_CODE_WRITE LIKE 1002
                 } else {
                     val pdfPath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
-                    var file = File(pdfPath,"Attendance.pdf")
+                    var file = File(pdfPath,"Attendance->$classname->$month.pdf")
                     var pdfWriter = PdfWriter(file)
                     var pdfDocument = PdfDocument(pdfWriter)
                     var document = Document(pdfDocument)

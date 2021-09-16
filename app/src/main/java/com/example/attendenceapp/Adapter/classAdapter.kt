@@ -30,10 +30,10 @@ import java.util.*
 
 class classAdapter(var viewModel:attendenceViewmodel): RecyclerView.Adapter<classAdapter.myclassViewHolder>() {
 
-    val currenttime = Calendar.getInstance().time
-    val fm = SimpleDateFormat("dd-MMM-yyyy", Locale.getDefault())
-    var date = fm.format(currenttime)
+ //   val ImageArray = intArrayOf(R.drawable.backfirst,R.drawable.backsecond,R.drawable.backthird,R.drawable.backfourth,R.drawable.backfive,R.drawable.backsix)
+
     inner class myclassViewHolder(itemView:View) : RecyclerView.ViewHolder(itemView)
+
 
     private val differcall = object: DiffUtil.ItemCallback<ClassItem>(){
         override fun areItemsTheSame(oldItem: ClassItem, newItem: ClassItem): Boolean {
@@ -55,6 +55,7 @@ class classAdapter(var viewModel:attendenceViewmodel): RecyclerView.Adapter<clas
         holder.itemView.apply {
             class_tv.text = classIem.ClassName
             subject_tv.text = classIem.SubjectName
+           // background_class.setImageResource(ImageArray.random())
             val colors = resources.getIntArray(R.array.random_color)
             val randomColor = colors[Random().nextInt(colors.size)]
             colorView.setBackgroundColor(randomColor)
