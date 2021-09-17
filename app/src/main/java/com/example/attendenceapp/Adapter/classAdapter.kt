@@ -114,24 +114,6 @@ class classAdapter(var viewModel:attendenceViewmodel): RecyclerView.Adapter<clas
                 }
                 true
             }
-           /* var tp = true
-            var ta = true;
-            viewModel.getClassStatus(classIem.C_id!!,date,"P").observe(lifecycleOwner, androidx.lifecycle.Observer {
-                if(it!=null && tp==true){
-                    presentCountTv.visibility = View.VISIBLE
-                    presentCountTv.text = it.toString()
-                    notifyDataSetChanged()
-                    tp = false
-                }
-            })
-            viewModel.getClassStatus(classIem.C_id!!,date,"A").observe(lifecycleOwner, androidx.lifecycle.Observer {
-                if(it!=null && ta==true){
-                    absentCountTv.visibility = View.VISIBLE
-                    absentCountTv.text = it.toString()
-                    notifyDataSetChanged()
-                    ta = false
-                }
-            })*/
         }
 
     }
