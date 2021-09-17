@@ -5,12 +5,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".OnboardingActivity">
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/onboading_background"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Attendance App"
-        android:textColor="@color/black"
+        android:fontFamily="@font/droid_serif"
+        android:textColor="@color/white"
         android:textSize="40sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"

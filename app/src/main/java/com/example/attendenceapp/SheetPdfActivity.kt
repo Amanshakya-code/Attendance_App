@@ -35,6 +35,7 @@ import com.itextpdf.layout.property.HorizontalAlignment
 import com.itextpdf.layout.property.TextAlignment
 import kotlinx.android.synthetic.main.activity_sheet_pdf.*
 import kotlinx.android.synthetic.main.activity_student.*
+import kotlinx.android.synthetic.main.toolbar.*
 import kotlinx.android.synthetic.main.toolbar.view.*
 import java.io.File
 import java.io.FileOutputStream
@@ -50,6 +51,7 @@ class SheetPdfActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sheet_pdf)
+        this.window.statusBarColor = resources.getColor(R.color.lightorange,this.theme)
         val repository = repository(DatabaseInstance.getDatabaseInstance(this))
         val viewModelFactory = viewModelFactory(application,respository = repository)
         viewModel = ViewModelProvider(this,viewModelFactory).get(attendenceViewmodel::class.java)
@@ -66,6 +68,7 @@ class SheetPdfActivity : AppCompatActivity() {
         pdf_toolbar.loadStatus.visibility = View.GONE
         pdf_toolbar.subtitle_toolbar.text = month
         pdf_toolbar.title_toolbar.text = classname
+        toolbar.setBackgroundColor(Color.parseColor("#78B3E3"))
 
         pdf_toolbar.backbutton.setOnClickListener {
             onBackPressed()

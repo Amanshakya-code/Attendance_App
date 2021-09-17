@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -10,12 +10,18 @@
     <include
         android:id="@+id/sheet_Toolbar"
         layout="@layout/toolbar"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/sheet_background"
+        android:layout_below="@+id/sheet_Toolbar"/>
 
     <ListView
         android:layout_margin="10dp"
+        android:layout_below="@+id/sheet_Toolbar"
         android:id="@+id/sheetList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:divider="@android:color/transparent"/>
 
-</LinearLayout>
+</RelativeLayout>

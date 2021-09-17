@@ -14,6 +14,7 @@ class OnboardingActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_onboarding)
+        this.window.statusBarColor = resources.getColor(R.color.onboardingcolor,this.theme)
         val sp = getSharedPreferences("mypref",Context.MODE_PRIVATE)
         var check = sp.getBoolean(PREFKEY,false)
         if(check == true)

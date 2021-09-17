@@ -31,6 +31,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        this.window.statusBarColor = resources.getColor(R.color.blue,this.theme)
         val sharedPref = getSharedPreferences("mypref", Context.MODE_PRIVATE)
         var editor = sharedPref.edit()
         editor.apply{
@@ -52,10 +53,15 @@ class MainActivity : AppCompatActivity() {
 
         viewModel.getClassData().observe(this, Observer {
 
-            if(it.isEmpty()){
-
+            Log.i("fron","$it -----> ${it.size}")
+            if(it.size == 0){
+                nonewsaved.visibility = View.VISIBLE
+                nothavingsavedarticle.visibility = View.VISIBLE
             }
-
+            else {
+                nonewsaved.visibility = View.GONE
+                nothavingsavedarticle.visibility = View.GONE
+            }
             adapter.differ.submitList(it)
             adapter.notifyDataSetChanged()
         })

@@ -6,6 +6,12 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="500dp"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/student_background"/>
+
     <TextView
         android:id="@+id/toptitle"
         android:layout_width="match_parent"
@@ -27,12 +33,35 @@
         android:src="@drawable/ic_baseline_add_24"
         android:layout_margin="28dp"/>
 
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/nothavingsavedarticle"
+        android:layout_width="match_parent"
+        android:layout_height="350dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/add_class"
+        android:visibility="gone"
+        android:layout_below="@+id/toptitle"
+        android:layout_marginTop="40dp"
+        tools:layout_editor_absoluteX="0dp" />
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/nonewsaved"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal|bottom"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/crimson_text"
+        android:textColor="@color/black"
+        android:text="Add Your First Class :)"
+        android:textSize="25sp"
+        android:visibility="gone"
+        android:layout_below="@+id/nothavingsavedarticle"
+        android:gravity="center"/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/classrecyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/toptitle"
-        android:padding="10dp"
-        tools:listitem="@layout/class_item" />
+        android:padding="10dp" />
 
 </RelativeLayout>

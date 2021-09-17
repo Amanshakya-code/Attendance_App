@@ -10,6 +10,11 @@
     <include
         android:id="@+id/toolbar_student"
         layout="@layout/toolbar" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/background_downward"
+        android:layout_below="@+id/toolbar_student"/>
 
     <LinearLayout
         android:id="@+id/countll"
@@ -17,23 +22,44 @@
         android:layout_below="@+id/toolbar_student"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <TextView
-            android:id="@+id/totalpresent"
+        <androidx.cardview.widget.CardView
             android:layout_width="0dp"
+            android:elevation="20dp"
+            app:cardCornerRadius="30dp"
             android:layout_weight="1"
-            android:textAlignment="center"
-            android:layout_height="wrap_content"
-            android:textColor="#376502"
-            android:text="Total Present = 12"/>
-        <TextView
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:textAlignment="center"
-            android:layout_height="wrap_content"
-            android:textColor="@color/red"
-            android:id="@+id/totalAbsent"
-            android:text="Total Absent = 29"
-            />
+            android:backgroundTint="@color/lightgreen"
+            android:layout_margin="10dp"
+            android:layout_height="40dp"
+            >
+            <TextView
+                android:id="@+id/totalpresent"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#376502"
+                android:textStyle="bold"
+                android:text="Total Present = 12"/>
+
+        </androidx.cardview.widget.CardView>
+       <androidx.cardview.widget.CardView
+           android:layout_width="0dp"
+           android:backgroundTint="@color/lightred"
+           android:layout_height="40dp"
+           app:cardCornerRadius="30dp"
+           android:elevation="20dp"
+           android:layout_margin="10dp"
+           android:layout_weight="1">
+           <TextView
+               android:layout_width="wrap_content"
+               android:layout_gravity="center"
+               android:layout_height="wrap_content"
+               android:textColor="@color/red"
+               android:textStyle="bold"
+               android:id="@+id/totalAbsent"
+               android:text="Total Absent = 29"
+               />
+       </androidx.cardview.widget.CardView>
+
     </LinearLayout>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/student_recylerView"

@@ -2,6 +2,7 @@ package com.example.attendenceapp
 
 import android.app.DatePickerDialog
 import android.content.Intent
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.InputType
@@ -67,6 +68,7 @@ class StudentActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_student)
+        this.window.statusBarColor = resources.getColor(R.color.light_blue,this.theme)
 
         subjectName = intent.getStringExtra(SUBJECT_NAME).toString()
         className = intent.getStringExtra(CLASS_NAME).toString()
@@ -196,6 +198,7 @@ class StudentActivity : AppCompatActivity() {
     private fun setToolBar() {
         toolbar_student.title_toolbar.text = className
         toolbar_student.subtitle_toolbar.text = date
+        toolbar.setBackgroundColor(Color.parseColor("#A6D66E"))
         toolbar_student.backbutton.setOnClickListener {
             onBackPressed()
         }

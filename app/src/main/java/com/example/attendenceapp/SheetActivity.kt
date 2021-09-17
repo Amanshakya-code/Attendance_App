@@ -1,6 +1,7 @@
 package com.example.attendenceapp
 
 import android.content.Intent
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -24,6 +25,7 @@ import com.example.attendenceapp.Repository.repository
 import com.example.attendenceapp.ViewModel.attendenceViewmodel
 import com.example.attendenceapp.ViewModel.viewModelFactory
 import kotlinx.android.synthetic.main.activity_sheet.*
+import kotlinx.android.synthetic.main.toolbar.*
 import kotlinx.android.synthetic.main.toolbar.view.*
 
 class SheetActivity : AppCompatActivity() {
@@ -35,6 +37,7 @@ class SheetActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sheet)
+        this.window.statusBarColor = resources.getColor(R.color.lightpink,this.theme)
         setUpToobar()
 
 
@@ -76,6 +79,7 @@ class SheetActivity : AppCompatActivity() {
         sheet_Toolbar.saveBtn.visibility = View.GONE
         sheet_Toolbar.title_toolbar.text = "Attendance Sheet"
         sheet_Toolbar.subtitle_toolbar.visibility = View.GONE
+        toolbar.setBackgroundColor(Color.parseColor("#ED6896"))
         sheet_Toolbar.backbutton.setOnClickListener {
             onBackPressed()
         }
