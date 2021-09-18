@@ -50,13 +50,21 @@ class StudentAdapter(var viewModel:attendenceViewmodel) :RecyclerView.Adapter<St
                 student_status_present.text = "P"
                 student_status_present.visibility = View.VISIBLE
                 student_status_absent.visibility = View.GONE
-                colorStudentView.setBackgroundColor(Color.parseColor("#A6D66E"))
+                colorStudentView.setBackgroundColor(Color.parseColor("#00FF0D"))
+                student_cardView.setCardBackgroundColor(Color.parseColor("#B8F4BB"))
             }
             else if(student.status == "A"){
                 student_status_absent.text = "A"
                 student_status_present.visibility = View.GONE
                 student_status_absent.visibility = View.VISIBLE
-                colorStudentView.setBackgroundColor(Color.parseColor("#EF5350"))
+                colorStudentView.setBackgroundColor(Color.parseColor("#FF0F00"))
+                student_cardView.setCardBackgroundColor(Color.parseColor("#F1C0BD"))
+            }
+            else{
+                student_status_present.visibility = View.GONE
+                student_status_absent.visibility = View.GONE
+                colorStudentView.setBackgroundColor(Color.parseColor("#FFFFFFFF"))
+                student_cardView.setCardBackgroundColor(Color.parseColor("#FFFFFFFF"))
             }
             student_rollnumber.text = student.st_roll
             /*if(student.status == "P"){
@@ -74,6 +82,7 @@ class StudentAdapter(var viewModel:attendenceViewmodel) :RecyclerView.Adapter<St
                     student_status_present.visibility = View.GONE
                     student_status_absent.visibility = View.VISIBLE
                     colorStudentView.setBackgroundColor(Color.parseColor("#EF5350"))
+                    student_cardView.setCardBackgroundColor(Color.parseColor("#F1C0BD"))
                 }
                 else if(currentStatus == "" || currentStatus == "A")
                 {
@@ -82,6 +91,7 @@ class StudentAdapter(var viewModel:attendenceViewmodel) :RecyclerView.Adapter<St
                     student_status_present.visibility = View.VISIBLE
                     student_status_absent.visibility = View.GONE
                     colorStudentView.setBackgroundColor(Color.parseColor("#A6D66E"))
+                    student_cardView.setCardBackgroundColor(Color.parseColor("#B8F4BB"))
                 }
                 student.status = currentStatus
                 //notifyDataSetChanged()

@@ -22,6 +22,9 @@
     <color name="lightpink">#ED6896</color>
     <color name="lightorange">#78B3E3</color>
     <color name="onboardingcolor">#018BFA</color>
+    <color name="greenlight">#187A1D</color>
+    <color name="redlight">#FF0F00</color>
+
 
     <color name="darkgrey">#2E2E2E</color>
     <color name="darkback">#80000000</color>
